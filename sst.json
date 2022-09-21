@@ -1,0 +1,5 @@
+{
+  "name": "awsug-chch-2022-10",
+  "region": "us-east-1",
+  "main": "stacks/index.ts"
+}
