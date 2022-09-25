@@ -20,3 +20,9 @@ export const title = style({
 export const url = style({
   color: vars.colors.text.dimmed,
 });
+
+export const row = style({
+  display: "flex",
+  justifyContent: "space-evenly",
+  flexDirection: "row",
+});

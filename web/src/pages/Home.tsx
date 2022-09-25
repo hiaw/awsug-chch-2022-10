@@ -5,6 +5,7 @@ import Empty from "../components/Empty";
 import Navbar from "../components/Navbar";
 import Loading from "../components/Loading";
 import * as styles from "./Home.css";
+import Folding from "../components/Folding";
 
 export default function Home() {
   // Handle empty document cache
@@ -29,17 +30,24 @@ export default function Home() {
       ) : articles.data?.articles && articles.data?.articles.length > 0 ? (
         <ol className={styles.list}>
           {articles.data?.articles.map((article) => (
-            <li key={article.id} className={styles.article}>
-              <div>
-                <h2 className={styles.title}>
-                  <Link to={`/article/${article.id}`}>{article.title}</Link>
-                </h2>
-                &nbsp;
-                <a target="_blank" href={article.url} className={styles.url}>
-                  ({article.url.replace(/(^\w+:|^)\/\//, "")})
-                </a>
+            <>
+              <li key={article.id} className={styles.article}>
+                <div>
+                  <h2 className={styles.title}>
+                    <Link to={`/article/${article.id}`}>{article.title}</Link>
+                  </h2>
+                  &nbsp;
+                  <a target="_blank" href={article.url} className={styles.url}>
+                    ({article.url.replace(/(^\w+:|^)\/\//, "")})
+                  </a>
+                </div>
+              </li>
+              <div className={styles.row}>
+                <Folding name="Auth">Auth</Folding>
+                <Folding name="Secret">Secret</Folding>
+                <Folding name="Bucket">Secret</Folding>
               </div>
-            </li>
+            </>
           ))}
         </ol>
       ) : (
