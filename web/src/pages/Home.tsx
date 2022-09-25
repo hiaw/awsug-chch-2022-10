@@ -21,6 +21,14 @@ export default function Home() {
     },
     context,
   });
+  const [secret] = useTypedQuery({
+    query: {
+      secret: {
+        key: true,
+      },
+    },
+    context,
+  });
 
   return (
     <div>
@@ -44,7 +52,7 @@ export default function Home() {
               </li>
               <div className={styles.row}>
                 <Folding name="Auth">Auth</Folding>
-                <Folding name="Secret">Secret</Folding>
+                <Folding name="Secret">{secret.data?.secret.key}</Folding>
                 <Folding name="Bucket">Secret</Folding>
               </div>
             </>

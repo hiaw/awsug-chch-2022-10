@@ -21,7 +21,13 @@ export interface Mutation {
 export interface Query {
     article: Article
     articles: Article[]
+    secret: Secret
     __typename: 'Query'
+}
+
+export interface Secret {
+    key: Scalars['String']
+    __typename: 'Secret'
 }
 
 export interface ArticleRequest{
@@ -41,6 +47,13 @@ export interface MutationRequest{
 export interface QueryRequest{
     article?: [{articleID: Scalars['String']},ArticleRequest]
     articles?: ArticleRequest
+    secret?: SecretRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+export interface SecretRequest{
+    key?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -69,6 +82,14 @@ export const isQuery = (obj?: { __typename?: any } | null): obj is Query => {
 }
 
 
+
+const Secret_possibleTypes: string[] = ['Secret']
+export const isSecret = (obj?: { __typename?: any } | null): obj is Secret => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isSecret"')
+  return Secret_possibleTypes.includes(obj.__typename)
+}
+
+
 export interface ArticlePromiseChain{
     id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
     title: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>}),
@@ -91,10 +112,20 @@ export interface MutationObservableChain{
 
 export interface QueryPromiseChain{
     article: ((args: {articleID: Scalars['String']}) => ArticlePromiseChain & {get: <R extends ArticleRequest>(request: R, defaultValue?: FieldsSelection<Article, R>) => Promise<FieldsSelection<Article, R>>}),
-    articles: ({get: <R extends ArticleRequest>(request: R, defaultValue?: FieldsSelection<Article, R>[]) => Promise<FieldsSelection<Article, R>[]>})
+    articles: ({get: <R extends ArticleRequest>(request: R, defaultValue?: FieldsSelection<Article, R>[]) => Promise<FieldsSelection<Article, R>[]>}),
+    secret: (SecretPromiseChain & {get: <R extends SecretRequest>(request: R, defaultValue?: FieldsSelection<Secret, R>) => Promise<FieldsSelection<Secret, R>>})
 }
 
 export interface QueryObservableChain{
     article: ((args: {articleID: Scalars['String']}) => ArticleObservableChain & {get: <R extends ArticleRequest>(request: R, defaultValue?: FieldsSelection<Article, R>) => Observable<FieldsSelection<Article, R>>}),
-    articles: ({get: <R extends ArticleRequest>(request: R, defaultValue?: FieldsSelection<Article, R>[]) => Observable<FieldsSelection<Article, R>[]>})
+    articles: ({get: <R extends ArticleRequest>(request: R, defaultValue?: FieldsSelection<Article, R>[]) => Observable<FieldsSelection<Article, R>[]>}),
+    secret: (SecretObservableChain & {get: <R extends SecretRequest>(request: R, defaultValue?: FieldsSelection<Secret, R>) => Observable<FieldsSelection<Secret, R>>})
+}
+
+export interface SecretPromiseChain{
+    key: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>})
+}
+
+export interface SecretObservableChain{
+    key: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>})
 }

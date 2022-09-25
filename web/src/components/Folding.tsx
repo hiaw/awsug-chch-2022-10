@@ -10,7 +10,6 @@ interface Props {
 export default function Folding(props: Props) {
   const [folded, setFolded] = useState(true);
   const onClick = () => {
-    console.log("onClick");
     setFolded(!folded);
   };
 

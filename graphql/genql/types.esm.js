@@ -2,7 +2,7 @@ export default {
     "scalars": [
         1,
         2,
-        5
+        6
     ],
     "types": {
         "Article": {
@@ -51,6 +51,17 @@ export default {
             ],
             "articles": [
                 0
+            ],
+            "secret": [
+                5
+            ],
+            "__typename": [
+                2
+            ]
+        },
+        "Secret": {
+            "key": [
+                2
             ],
             "__typename": [
                 2

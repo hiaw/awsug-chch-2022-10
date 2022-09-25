@@ -1,4 +1,9 @@
-import { use, StackContext, ViteStaticSite } from "@serverless-stack/resources";
+import {
+  use,
+  StackContext,
+  ViteStaticSite,
+  Config,
+} from "@serverless-stack/resources";
 import { Api } from "./Api";
 
 export function Web({ stack }: StackContext) {

@@ -20,3 +20,11 @@ export var isQuery = function(obj) {
   if (!obj || !obj.__typename) throw new Error('__typename is missing in "isQuery"')
   return Query_possibleTypes.includes(obj.__typename)
 }
+
+
+
+var Secret_possibleTypes = ['Secret']
+export var isSecret = function(obj) {
+  if (!obj || !obj.__typename) throw new Error('__typename is missing in "isSecret"')
+  return Secret_possibleTypes.includes(obj.__typename)
+}

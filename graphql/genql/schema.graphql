@@ -11,4 +11,9 @@ type Mutation {
 type Query {
   article(articleID: String!): Article!
   articles: [Article!]!
+  secret: Secret!
+}
+
+type Secret {
+  key: String!
 }
