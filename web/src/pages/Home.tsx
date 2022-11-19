@@ -50,17 +50,17 @@ export default function Home() {
                   </a>
                 </div>
               </li>
-              <div className={styles.row}>
-                <Folding name="Auth">Auth</Folding>
-                <Folding name="Secret">{secret.data?.secret.key}</Folding>
-                <Folding name="Bucket">Secret</Folding>
-              </div>
             </>
           ))}
         </ol>
       ) : (
         <Empty>&#10024; Post the first link &#10024;</Empty>
       )}
+      <div className={styles.row}>
+        <Folding name="Auth">Auth</Folding>
+        <Folding name="Secret">{secret.data?.secret.key}</Folding>
+        <Folding name="Bucket">Secret</Folding>
+      </div>
     </div>
   );
 }

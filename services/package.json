@@ -6,7 +6,6 @@
   "dependencies": {
     "aws-sdk": "^2.1220.0",
     "@pothos/core": "^3.21.0",
-    "@serverless-stack/node": "^1.14.4",
     "graphql": "^16.6.0",
     "ulid": "^2.3.0",
     "electrodb": "^1.12.1",
