@@ -2,13 +2,14 @@ import {
   StackContext,
   use,
   Api as ApiGateway,
+  Auth,
 } from "@serverless-stack/resources";
 import { Database } from "./Database";
 import { Secrets } from "./Secrets";
 
 export function Api({ stack }: StackContext) {
   const table = use(Database);
-  const { SECRET_KEY } = use(Secrets);
+  const { SECRET_KEY, GOOGLE_CLIENT_ID } = use(Secrets);
 
   const api = new ApiGateway(stack, "api", {
     defaults: {
@@ -31,6 +32,18 @@ export function Api({ stack }: StackContext) {
         },
       },
     },
+  });
+
+  const auth = new Auth(stack, "auth", {
+    authenticator: {
+      handler: "functions/auth/auth.handler",
+      bind: [GOOGLE_CLIENT_ID],
+    },
+  });
+
+  auth.attach(stack, {
+    api,
+    prefix: "/auth", // optional
   });
 
   stack.addOutputs({
