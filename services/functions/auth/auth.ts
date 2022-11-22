@@ -1,5 +1,18 @@
-import { AuthHandler, GoogleAdapter } from "@serverless-stack/node/auth";
+import {
+  AuthHandler,
+  GoogleAdapter,
+  Session,
+} from "@serverless-stack/node/auth";
 import { Config } from "@serverless-stack/node/config";
+
+declare module "@serverless-stack/node/auth" {
+  export interface SessionTypes {
+    user: {
+      sub: string;
+      email: string;
+    };
+  }
+}
 
 export const handler = AuthHandler({
   providers: {
@@ -7,10 +20,16 @@ export const handler = AuthHandler({
       mode: "oidc",
       clientID: Config.GOOGLE_CLIENT_ID,
       onSuccess: async (tokenset) => {
-        return {
-          statusCode: 200,
-          body: JSON.stringify(tokenset.claims()),
-        };
+        const claims = tokenset.claims();
+
+        return Session.parameter({
+          redirect: "https://example.com",
+          type: "user",
+          properties: {
+            sub: claims.sub,
+            email: claims.email || "",
+          },
+        });
       },
     }),
   },

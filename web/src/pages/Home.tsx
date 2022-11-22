@@ -30,6 +30,8 @@ export default function Home() {
     context,
   });
 
+  console.log(import.meta.env);
+
   return (
     <div>
       <Navbar />
@@ -57,7 +59,9 @@ export default function Home() {
         <Empty>&#10024; Post the first link &#10024;</Empty>
       )}
       <div className={styles.row}>
-        <Folding name="Auth">Auth</Folding>
+        <Folding name="Auth">
+          <a href={import.meta.env.AUTH_URL}>Auth with Google</a>
+        </Folding>
         <Folding name="Secret">{secret.data?.secret.key}</Folding>
         <Folding name="Bucket">Secret</Folding>
       </div>
