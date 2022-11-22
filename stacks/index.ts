@@ -3,6 +3,7 @@ import { Api } from "./Api";
 import { Web } from "./Web";
 import { Database } from "./Database";
 import { Secrets } from "./Secrets";
+import { Buckets } from "./Buckets";
 
 export default function main(app: App) {
   app.setDefaultFunctionProps({
@@ -15,6 +16,7 @@ export default function main(app: App) {
   app
     .stack(Secrets)
     .stack(Database)
+    .stack(Buckets)
     .stack(Api)
     .stack(Web);
 }

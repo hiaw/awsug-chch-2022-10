@@ -4,32 +4,32 @@ import {
   Api as ApiGateway,
   Auth,
 } from "@serverless-stack/resources";
+import { Buckets } from "./Buckets";
 import { Database } from "./Database";
 import { Secrets } from "./Secrets";
 
 export function Api({ stack }: StackContext) {
   const table = use(Database);
+  const bucket = use(Buckets);
   const { SECRET_KEY, GOOGLE_CLIENT_ID } = use(Secrets);
 
   const api = new ApiGateway(stack, "api", {
     defaults: {
       function: {
-        bind: [table, SECRET_KEY],
+        bind: [table, bucket, SECRET_KEY],
       },
     },
     routes: {
       "POST /graphql": {
-        type: "graphql",
+        type: "pothos",
         function: {
           handler: "functions/graphql/graphql.handler",
         },
-        pothos: {
-          schema: "services/functions/graphql/schema.ts",
-          output: "graphql/schema.graphql",
-          commands: [
-            "npx genql --output ./graphql/genql --schema ./graphql/schema.graphql --esm",
-          ],
-        },
+        schema: "services/functions/graphql/schema.ts",
+        output: "graphql/schema.graphql",
+        commands: [
+          "npx genql --output ./graphql/genql --schema ./graphql/schema.graphql --esm",
+        ],
       },
     },
   });

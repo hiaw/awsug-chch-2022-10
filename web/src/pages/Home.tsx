@@ -29,6 +29,14 @@ export default function Home() {
     },
     context,
   });
+  // const [upload] = useTypedQuery({
+  //   query: {
+  //     imageUpload: {
+  //       preSignedURL: true,
+  //     },
+  //   },
+  //   context,
+  // });
 
   return (
     <div>
